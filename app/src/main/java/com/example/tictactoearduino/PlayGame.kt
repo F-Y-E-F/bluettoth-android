@@ -6,23 +6,52 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import kotlinx.android.synthetic.main.activity_play_game.*
+import kotlin.random.Random
 
 
 class PlayGame : AppCompatActivity() {
+
+    private lateinit var listOfButtons : ArrayList<ImageView>
+    private var activePlayer:String = "o"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play_game)
-        val str = SpannableStringBuilder("It's  x  move")
-        str.setSpan(
-            StyleSpan(R.font.segoeuib),
-            4,
-            8,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
+        listOfButtons  = arrayListOf(field_1,field_2,field_3,field_4,field_5,field_6,field_7,field_8,field_9)\
+        setRandomStartPlayer()
+        buttonsOnClick()
+    }
+
+
+    private fun setRandomStartPlayer(){
+        activePlayer = if (Random.nextInt(0,1) == 0) "o" else "x"
+    }
+
+
+    private fun buttonsOnClick(){
+        var fieldId:Int
+        listOfButtons.forEach { field->
+            field.setOnClickListener {
+                fieldId = listOfButtons.indexOf(field)
+                setFieldSymbol(fieldId)
+            }
+        }
+    }
+
+    private fun setFieldSymbol(fieldId: Int) {
+        listOfButtons[fieldId].setImageResource(R.drawable.tac)
+    }
+
+
+    private fun setActivePlayerText(playerSymbol:String){
+        val str = SpannableStringBuilder("It's $playerSymbol move")
+        str.setSpan(StyleSpan(R.font.segoeuib), 4, 8, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         playerMoveText.text = str
     }
 }
