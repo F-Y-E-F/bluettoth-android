@@ -34,6 +34,11 @@ class MainActivity : AppCompatActivity() {
         if(!bluetoothAdapter!!.isEnabled){
             requestBluetooth()
         }
+
+        refresh.setOnRefreshListener {
+            getPairedDevicesList()
+            refresh.isRefreshing = false
+        }
     }
 
     private fun showSnack(text:String,view: View){
@@ -81,7 +86,7 @@ class MainActivity : AppCompatActivity() {
             selectDeviceList.adapter = adapter
 
             selectDeviceList.onItemClickListener = AdapterView.OnItemClickListener{ _, _, position, _->
-                val intent = Intent(this,TicTacToegame::class.java)
+                val intent = Intent(this,MainActivity::class.java)
                 intent.putExtra(EXTRA_ADDRESS,listOfDevices[position].address)
                 startActivity(intent)
             }
