@@ -23,7 +23,7 @@ class PlayGame : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play_game)
-        listOfButtons  = arrayListOf(field_1,field_2,field_3,field_4,field_5,field_6,field_7,field_8,field_9)\
+        listOfButtons  = arrayListOf(field_1,field_2,field_3,field_4,field_5,field_6,field_7,field_8,field_9)
         setRandomStartPlayer()
         buttonsOnClick()
     }
@@ -39,13 +39,21 @@ class PlayGame : AppCompatActivity() {
         listOfButtons.forEach { field->
             field.setOnClickListener {
                 fieldId = listOfButtons.indexOf(field)
+                setActivePlayerText(if(activePlayer=="o")"x" else "o")
                 setFieldSymbol(fieldId)
+                activePlayer = if(activePlayer == "o") "x" else "o"
+                listOfButtons[fieldId].isEnabled = false
             }
         }
     }
 
     private fun setFieldSymbol(fieldId: Int) {
-        listOfButtons[fieldId].setImageResource(R.drawable.tac)
+        listOfButtons[fieldId].setImageResource(if(activePlayer=="o")R.drawable.tic else R.drawable.tac)
+        checkWinner()
+    }
+
+    private fun checkWinner() {
+        TODO("Not yet implemented")
     }
 
 
