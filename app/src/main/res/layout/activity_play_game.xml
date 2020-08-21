@@ -40,7 +40,8 @@
             android:id="@+id/field_1"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:padding="10dp" />
+            android:src="@drawable/tic"
+            android:padding="20dp" />
 
         <View
             android:layout_width="0.5dp"
@@ -51,7 +52,8 @@
             android:id="@+id/field_2"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:padding="10dp" />
+            android:src="@drawable/tac"
+            android:padding="20dp" />
 
         <View
             android:layout_width="0.5dp"
@@ -82,8 +84,7 @@
             android:id="@+id/field_4"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:padding="10dp"
-            />
+            android:padding="20dp" />
 
         <View
             android:layout_width="0.5dp"
@@ -94,8 +95,7 @@
             android:id="@+id/field_5"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:padding="10dp"
-            />
+            android:padding="20dp" />
 
         <View
             android:layout_width="0.5dp"
@@ -106,8 +106,7 @@
             android:id="@+id/field_6"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:padding="10dp"
-             />
+            android:padding="20dp" />
     </LinearLayout>
 
     <View
@@ -126,8 +125,7 @@
             android:id="@+id/field_7"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:padding="10dp"
-            />
+            android:padding="20dp" />
 
         <View
             android:layout_width="0.5dp"
@@ -138,8 +136,7 @@
             android:id="@+id/field_8"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:padding="10dp"
-             />
+            android:padding="20dp" />
 
         <View
             android:layout_width="0.5dp"
@@ -150,8 +147,8 @@
             android:id="@+id/field_9"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:padding="10dp"
-             />
+            android:padding="20dp" />
+
     </LinearLayout>
 
     <TextView
@@ -173,4 +170,5 @@
         android:layout_marginTop="-7dp"
         android:fontFamily="@font/segoeui"
         android:textColor="@color/white" />
+
 </LinearLayout>
