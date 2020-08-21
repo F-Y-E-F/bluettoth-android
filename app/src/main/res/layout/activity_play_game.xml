@@ -9,23 +9,158 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
         android:drawableLeft="@drawable/ic_back"
         android:text="Back"
-        android:textSize="22sp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="15dp"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/playerMoveText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="26sp"
         android:layout_marginTop="50dp"
+        android:fontFamily="@font/segoeuil"
         android:text="It's x move"
         android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:padding="10dp" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="100dp"
+            android:background="@color/light_gray" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:padding="10dp"
+      />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="100dp"
+            android:background="@color/light_gray" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:padding="10dp"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="300dp"
+        android:layout_height="0.5dp"
+        android:layout_gravity="center"
+        android:background="@color/light_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:padding="10dp"
+            />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="100dp"
+            android:background="@color/light_gray" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:padding="10dp"
+            />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="100dp"
+            android:background="@color/light_gray" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:padding="10dp"
+             />
+    </LinearLayout>
+
+    <View
+        android:layout_width="300dp"
+        android:layout_height="0.5dp"
+        android:layout_gravity="center"
+        android:background="@color/light_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:padding="10dp"
+            />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="100dp"
+            android:background="@color/light_gray" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:padding="10dp"
+             />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="100dp"
+            android:background="@color/light_gray" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:padding="10dp"
+             />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1:32"
+        android:textAlignment="center"
+        android:textSize="36sp"
         android:fontFamily="@font/segoeuil"
-        android:textColor="@color/white"/>
-
-
+        android:textColor="@color/white"
+        android:layout_marginTop="60dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TIME PASSED"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:layout_marginTop="-7dp"
+        android:fontFamily="@font/segoeui"
+        android:textColor="@color/white" />
 </LinearLayout>
