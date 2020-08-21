@@ -14,36 +14,43 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    //-------------------------NEED TO GET PAIRED DEVICES----------------------------------
     private var bluetoothAdapter: BluetoothAdapter? = null
     private lateinit var pairedDevices:Set<BluetoothDevice>
+    //=====================================================================================
 
 
+    //-------------------------------ACTIVITY RESULT ON BLUETOOTH ENABLED AND DEVICE ADDRESS INTENT PROPERTY NAME----------------------------
     companion object{
         const val REQUEST_ENABLE_BLUETOOTH = 1
         const val EXTRA_ADDRESS = "device_address"
     }
+    //=======================================================================================================================================
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-        if(bluetoothAdapter == null){
-            return showSnack("Device not support bluetooth",refresh)
-        }
-        if(!bluetoothAdapter!!.isEnabled){
-            requestBluetooth()
-        }
 
+        //NOT SUPPORT BLUETOOTH ADAPTER
+        if(bluetoothAdapter == null) return showSnack("Device not support bluetooth",refresh)
+
+        //BLUETOOTH DISABLED
+        if(!bluetoothAdapter!!.isEnabled) requestBluetooth()
+
+
+        //REFRESH LIST OF PAIRED DEVICES
         refresh.setOnRefreshListener {
             getPairedDevicesList()
             refresh.isRefreshing = false
         }
     }
 
-    private fun showSnack(text:String,view: View){
-        Snackbar.make(view,text,Snackbar.LENGTH_SHORT).show()
-    }
+    //SHOW SNACKBAR WITH MESSAGE
+    private fun showSnack(text:String,view: View) = Snackbar.make(view,text,Snackbar.LENGTH_SHORT).show()
+
+    //REQUEST BLUETOOTH ENABLE
     private fun requestBluetooth(){
         val bluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
         startActivityForResult(bluetoothIntent, REQUEST_ENABLE_BLUETOOTH)
@@ -51,6 +58,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    //---------------------------ACTIVITY RESULT FOR BLUETOOTH ENABLE---------------------------
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
             if(requestCode == REQUEST_ENABLE_BLUETOOTH){
@@ -63,12 +71,17 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    //==========================================================================================
 
 
 
 
+    //-------------GET PAIRED DEVICES LIST---------------
     private fun getPairedDevicesList(){
+
+        //BLUETOOTH DISABLED
         if(!bluetoothAdapter!!.isEnabled) requestBluetooth()
+
         else{
             pairedDevices = bluetoothAdapter!!.bondedDevices
             val listOfDevices = ArrayList<BluetoothDevice>()
@@ -86,7 +99,7 @@ class MainActivity : AppCompatActivity() {
             selectDeviceList.adapter = adapter
 
             selectDeviceList.onItemClickListener = AdapterView.OnItemClickListener{ _, _, position, _->
-                val intent = Intent(this,MainActivity::class.java)
+                val intent = Intent(this,PlayGame::class.java)
                 intent.putExtra(EXTRA_ADDRESS,listOfDevices[position].address)
                 startActivity(intent)
             }
@@ -94,4 +107,5 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+    //============================================
 }
