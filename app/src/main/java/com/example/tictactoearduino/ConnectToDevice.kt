@@ -13,28 +13,34 @@ class ConnectToDevice(private val context: Context):AsyncTask<Void,Void,String>(
 
     override fun onPreExecute() {
         super.onPreExecute()
-        dialog.show()
+        dialog.apply {
+            show()
+        }
     }
+
     override fun doInBackground(vararg p0: Void?): String {
         try{
             if(PlayGame.bluetoothSocket == null){
                 PlayGame.bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-                val device = PlayGame.bluetoothAdapter.getRemoteDevice(PlayGame.address)
-                PlayGame.bluetoothSocket = device.createInsecureRfcommSocketToServiceRecord(PlayGame.uid)
+                val device  = PlayGame.bluetoothAdapter.getRemoteDevice(PlayGame.address)
+                PlayGame.bluetoothSocket = device.createInsecureRfcommSocketToServiceRecord(
+                    PlayGame.uid
+                )
                 BluetoothAdapter.getDefaultAdapter().cancelDiscovery()
                 PlayGame.bluetoothSocket!!.connect()
             }
-        }catch (ex:IOException){
+        }catch (e: IOException){
             this.cancel(true)
-            Toast.makeText(context,"Error ${ex.message}",Toast.LENGTH_SHORT).show()
+            toast("${e.message}")
+            e.printStackTrace()
         }
         return ""
     }
 
     override fun onPostExecute(result: String?) {
         super.onPostExecute(result)
+
         dialog.dismiss()
     }
-
-
+    private fun toast(s: String) = Toast.makeText(context,s, Toast.LENGTH_SHORT).show()
 }

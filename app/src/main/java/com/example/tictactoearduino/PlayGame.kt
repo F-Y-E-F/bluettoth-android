@@ -10,9 +10,11 @@ import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
 import android.util.Log
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_play_game.*
+import java.io.IOException
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.random.Random
@@ -22,7 +24,7 @@ class PlayGame : AppCompatActivity() {
 
 
     companion object{
-        var uid : UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
+        var uid :UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
         var bluetoothSocket : BluetoothSocket? = null
         lateinit var bluetoothAdapter: BluetoothAdapter
         lateinit var address:String
@@ -42,11 +44,23 @@ class PlayGame : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play_game)
         address = if(intent.hasExtra(MainActivity.EXTRA_ADDRESS)) intent.getStringExtra(MainActivity.EXTRA_ADDRESS)!! else ""
+        Log.d("TAG", address)
         ConnectToDevice(this).execute()
         listOfButtons  = arrayListOf(field_1,field_2,field_3,field_4,field_5,field_6,field_7,field_8,field_9)
         setRandomStartPlayer()
         buttonsOnClick()
+
+        field_1.setOnClickListener {
+            setCommand("1")
+        }
+
+        field_2.setOnClickListener {
+            setCommand("0")
+        }
     }
+
+
+
 
     //set text which player turn is it
     private fun setActivePlayerText(playerSymbol:String){
@@ -55,6 +69,16 @@ class PlayGame : AppCompatActivity() {
         playerMoveText.text = str
     }
 
+    private fun setCommand(input: String){
+        if(bluetoothSocket !=null){
+            try{
+                bluetoothSocket!!.outputStream.write(input.toByteArray())
+            }catch (e:IOException){
+                Toast.makeText(applicationContext, "${e.message}", Toast.LENGTH_SHORT).show()
+                e.printStackTrace()
+            }
+        }
+    }
 
     //generate random player on start
     private fun setRandomStartPlayer(){
