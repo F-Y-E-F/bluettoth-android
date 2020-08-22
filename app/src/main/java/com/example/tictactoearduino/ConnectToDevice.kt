@@ -14,10 +14,11 @@ class ConnectToDevice(private val context: Context):AsyncTask<Void,Void,String>(
     override fun onPreExecute() {
         super.onPreExecute()
         dialog.apply {
-            show()
+            show()//show loading dialog
         }
     }
 
+    //create bluetooth socket and connect to device
     override fun doInBackground(vararg p0: Void?): String {
         try{
             if(PlayGame.bluetoothSocket == null){
@@ -39,7 +40,7 @@ class ConnectToDevice(private val context: Context):AsyncTask<Void,Void,String>(
 
     override fun onPostExecute(result: String?) {
         super.onPostExecute(result)
-
+        //dismiss loading dialog
         dialog.dismiss()
     }
     private fun toast(s: String) = Toast.makeText(context,s, Toast.LENGTH_SHORT).show()

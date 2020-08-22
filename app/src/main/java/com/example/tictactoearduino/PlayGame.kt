@@ -43,20 +43,17 @@ class PlayGame : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play_game)
+
+        //get address from intent
         address = if(intent.hasExtra(MainActivity.EXTRA_ADDRESS)) intent.getStringExtra(MainActivity.EXTRA_ADDRESS)!! else ""
-        Log.d("TAG", address)
+        //execute async task to connect
         ConnectToDevice(this).execute()
+
         listOfButtons  = arrayListOf(field_1,field_2,field_3,field_4,field_5,field_6,field_7,field_8,field_9)
         setRandomStartPlayer()
         buttonsOnClick()
 
-        field_1.setOnClickListener {
-            setCommand("1")
-        }
 
-        field_2.setOnClickListener {
-            setCommand("0")
-        }
     }
 
 
@@ -69,16 +66,7 @@ class PlayGame : AppCompatActivity() {
         playerMoveText.text = str
     }
 
-    private fun setCommand(input: String){
-        if(bluetoothSocket !=null){
-            try{
-                bluetoothSocket!!.outputStream.write(input.toByteArray())
-            }catch (e:IOException){
-                Toast.makeText(applicationContext, "${e.message}", Toast.LENGTH_SHORT).show()
-                e.printStackTrace()
-            }
-        }
-    }
+
 
     //generate random player on start
     private fun setRandomStartPlayer(){
@@ -167,4 +155,32 @@ class PlayGame : AppCompatActivity() {
         if(winner != -1) Handler().postDelayed({onBackPressed()},4000)
     }
     //=======================================================================================
+
+
+
+    //--------------------------send message to device------------------------------
+    private fun setCommand(input: String){
+        if(bluetoothSocket !=null){
+            try{
+                bluetoothSocket!!.outputStream.write(input.toByteArray())
+            }catch (e:IOException){
+                Toast.makeText(applicationContext, "${e.message}", Toast.LENGTH_SHORT).show()
+                e.printStackTrace()
+            }
+        }
+    }
+    //==============================================================================
+
+
+    //-----------------------------------disconnect from device----------------------------------
+    private fun disconnect(){
+        if(bluetoothSocket!=null){
+            try {
+                bluetoothSocket!!.close()
+                bluetoothSocket = null
+            }catch (e:IOException){e.printStackTrace()}
+        }
+        finish()
+    }
+    //============================================================================================
 }
