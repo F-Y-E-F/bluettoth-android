@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -19,6 +20,10 @@ class PlayGame : AppCompatActivity() {
 
     private lateinit var listOfButtons : ArrayList<ImageView>
     private var activePlayer:String = "o"
+
+
+    private var listOfOFields = ArrayList<Int>()
+    private var listOfXFields = ArrayList<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +44,7 @@ class PlayGame : AppCompatActivity() {
         listOfButtons.forEach { field->
             field.setOnClickListener {
                 fieldId = listOfButtons.indexOf(field)
+                if(activePlayer=="o") listOfOFields.add(fieldId) else listOfXFields.add(fieldId)
                 setActivePlayerText(if(activePlayer=="o")"x" else "o")
                 setFieldSymbol(fieldId)
                 activePlayer = if(activePlayer == "o") "x" else "o"
@@ -53,7 +59,16 @@ class PlayGame : AppCompatActivity() {
     }
 
     private fun checkWinner() {
-        TODO("Not yet implemented")
+        var winner:Int = -1
+
+
+        for(i:Int in 1..3){
+                
+        }
+
+
+        Log.d("TAG",listOfOFields.toString())
+        Log.d("TAG",listOfXFields.toString())
     }
 
 
