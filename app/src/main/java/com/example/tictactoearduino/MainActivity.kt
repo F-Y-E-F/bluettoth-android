@@ -98,11 +98,6 @@ class MainActivity : AppCompatActivity() {
             selectDeviceList.layoutManager = LinearLayoutManager(this)
             selectDeviceList.adapter = BluetoothDevicesRecyclerViewAdapter(listOfDevices,this)
 
-           /* selectDeviceList.onItemClickListener = AdapterView.OnItemClickListener{ _, _, position, _->
-                val intent = Intent(this,PlayGame::class.java)
-                intent.putExtra(EXTRA_ADDRESS,listOfDevices[position].address)
-                startActivity(intent)
-            }*/
 
 
         }
