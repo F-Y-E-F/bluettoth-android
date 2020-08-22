@@ -61,7 +61,7 @@ class PlayGame : AppCompatActivity() {
     //set text which player turn is it
     private fun setActivePlayerText(playerSymbol:String){
         val str = SpannableStringBuilder("It's $playerSymbol move")
-        str.setSpan(StyleSpan(R.font.segoeuib), 4, 8, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        str.setSpan(StyleSpan(R.font.segoeuib), 4, 7, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         playerMoveText.text = str
     }
 
@@ -167,7 +167,13 @@ class PlayGame : AppCompatActivity() {
             1-> Snackbar.make(mainView,"o player win!",Snackbar.LENGTH_LONG).setTextColor(Color.parseColor("#ffd500")).show()
             2-> Snackbar.make(mainView,"x player win!",Snackbar.LENGTH_LONG).setTextColor(Color.parseColor("#ffd500")).show()
         }
-        if(winner != -1) Handler().postDelayed({onBackPressed()},4000)
+        if(winner != -1) try{
+            Handler().postDelayed({
+                setCommand("win")
+                disconnect()
+                onBackPressed()
+            },4000)
+        }catch (ex:Exception){}
     }
     //=======================================================================================
 
