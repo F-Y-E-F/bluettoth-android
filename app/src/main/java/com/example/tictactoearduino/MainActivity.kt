@@ -95,10 +95,9 @@ class MainActivity : AppCompatActivity() {
                 }
             else showSnack("Cannot find eny paired devices",refresh)
 
-            val adapter = BluetoothDevicesRecyclerViewAdapter()
 
             selectDeviceList.layoutManager = LinearLayoutManager(this)
-            selectDeviceList.adapter = adapter
+            selectDeviceList.adapter = BluetoothDevicesRecyclerViewAdapter(listOfDevices,this)
 
            /* selectDeviceList.onItemClickListener = AdapterView.OnItemClickListener{ _, _, position, _->
                 val intent = Intent(this,PlayGame::class.java)
