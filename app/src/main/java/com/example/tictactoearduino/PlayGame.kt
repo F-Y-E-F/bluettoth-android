@@ -53,7 +53,6 @@ class PlayGame : AppCompatActivity() {
         setRandomStartPlayer()
         buttonsOnClick()
 
-
     }
 
 

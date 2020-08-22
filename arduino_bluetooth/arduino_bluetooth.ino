@@ -9,8 +9,7 @@ Adafruit_ILI9341 tft = Adafruit_ILI9341(10, 9, 11, 13, 8, 12);
 
 
 
-char i_byte = 0;
- 
+String message = "";
   
                 
 void setup() 
@@ -28,12 +27,46 @@ void setup()
 
 void loop()
 {
-  if(Serial.available() > 0)  
-  {
-    i_byte = Serial.read();         
-    if(i_byte == '1')             
-      tft.fillScreen(ILI9341_RED);
-    else if(i_byte == '0')       
-      tft.fillScreen(ILI9341_BLUE);
-  }                            
+
+  while (Serial.available() > 0) {  
+     message = message + char(Serial.read());
+  }
+
+  if(message=="zxc"){
+      tft.setCursor(0,0);
+      tft.setTextColor(ILI9341_YELLOW);  tft.setTextSize(7);
+
+      tft.setCursor(105,210);
+      tft.print("o");
+      
+      tft.setCursor(35,210);
+      tft.print("o");
+
+      tft.setCursor(175,210);
+      tft.print("o");
+
+      tft.setCursor(105,130);
+      tft.print("o");
+      
+      tft.setCursor(35,130);
+      tft.print("o");
+
+      tft.setCursor(175,130);
+      tft.print("o");
+
+
+      tft.setCursor(105,50);
+      tft.print("o");
+      
+      tft.setCursor(35,50);
+      tft.print("o");
+
+      tft.setCursor(175,50);
+      tft.print("o");
+    }
+      
+               
+      
+  
+                           
 }
