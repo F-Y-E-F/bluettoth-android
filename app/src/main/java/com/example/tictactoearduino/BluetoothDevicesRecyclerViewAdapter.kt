@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class BluetoothDevicesRecyclerViewAdapter:RecyclerView.Adapter<BluetoothDevicesViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BluetoothDevicesViewHolder {
-        return LayoutInflater.from(parent.context).inflate(R.layout.,parent,false)
+        return BluetoothDevicesViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.bluetooth_device_card,parent,false))
     }
 
     override fun getItemCount(): Int {
