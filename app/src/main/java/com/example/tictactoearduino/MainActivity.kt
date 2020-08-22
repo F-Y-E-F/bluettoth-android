@@ -86,16 +86,15 @@ class MainActivity : AppCompatActivity() {
         else{
             pairedDevices = bluetoothAdapter!!.bondedDevices
             val listOfDevices = ArrayList<BluetoothDevice>()
-            val listOfDevicesNames = ArrayList<String>()
 
             if(pairedDevices.isNotEmpty())
                 for(device  in pairedDevices){
                     listOfDevices.add(device)
-                    listOfDevicesNames.add(device.name)
                 }
             else showSnack("Cannot find eny paired devices",refresh)
 
 
+            //setup  recyclerview
             selectDeviceList.layoutManager = LinearLayoutManager(this)
             selectDeviceList.adapter = BluetoothDevicesRecyclerViewAdapter(listOfDevices,this)
 

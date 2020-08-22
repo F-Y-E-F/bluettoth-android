@@ -23,6 +23,7 @@ class BluetoothDevicesRecyclerViewAdapter(private val listOfDevices:ArrayList<Bl
         holder.deviceName.text = listOfDevices[holder.adapterPosition].name
         holder.deviceAddress.text = listOfDevices[holder.adapterPosition].address
 
+        //g oto play game screen
         holder.parseButton.setOnClickListener {
             val intent = Intent(context,PlayGame::class.java)
             intent.putExtra(EXTRA_ADDRESS,listOfDevices[position].address)
