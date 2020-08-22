@@ -52,10 +52,6 @@ class PlayGame : AppCompatActivity() {
         listOfButtons  = arrayListOf(field_1,field_2,field_3,field_4,field_5,field_6,field_7,field_8,field_9)
         setRandomStartPlayer()
         buttonsOnClick()
-        field_1.setOnClickListener {
-            setCommand("o(35,210)")
-        }
-
 
     }
 
@@ -87,6 +83,7 @@ class PlayGame : AppCompatActivity() {
                 if(activePlayer=="o") listOfOFields.add(fieldId) else listOfXFields.add(fieldId)
                 setActivePlayerText(if(activePlayer=="o")"x" else "o")
                 setFieldSymbol(fieldId)
+                setCommandToField(fieldId,activePlayer)
                 activePlayer = if(activePlayer == "o") "x" else "o"
                 listOfButtons[fieldId].isEnabled = false
             }
@@ -98,6 +95,21 @@ class PlayGame : AppCompatActivity() {
     private fun setFieldSymbol(fieldId: Int) {
         listOfButtons[fieldId].setImageResource(if(activePlayer=="o")R.drawable.tic else R.drawable.tac)
         checkWinner()
+    }
+
+
+    private fun setCommandToField(fieldId:Int,symbol:String){
+        when(fieldId){
+            0-> setCommand("$symbol(35,50)")
+            1-> setCommand("$symbol(105,50)")
+            2-> setCommand("$symbol(175,50)")
+            3-> setCommand("$symbol(35,130)")
+            4-> setCommand("$symbol(105,130)")
+            5-> setCommand("$symbol(175,130)")
+            6-> setCommand("$symbol(35,210)")
+            7-> setCommand("$symbol(105,210)")
+            8-> setCommand("$symbol(175,210)")
+        }
     }
 
 
