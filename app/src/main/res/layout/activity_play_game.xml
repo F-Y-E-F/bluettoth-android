@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey"
+    android:id="@+id/mainView"
     android:orientation="vertical">
 
 
@@ -40,7 +41,6 @@
             android:id="@+id/field_1"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/tic"
             android:padding="20dp" />
 
         <View
@@ -52,7 +52,6 @@
             android:id="@+id/field_2"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/tac"
             android:padding="20dp" />
 
         <View
