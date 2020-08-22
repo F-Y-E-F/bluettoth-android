@@ -7,5 +7,5 @@ import kotlinx.android.synthetic.main.bluetooth_device_card.view.*
 class BluetoothDevicesViewHolder(v: View): RecyclerView.ViewHolder(v){
     val deviceName = v.deviceNameTV!!
     val deviceAddress = v.deviceAddressTV!!
-    val parseButton = v.parseButton!!
+    val parseButton = v.deviceCard!!
 }

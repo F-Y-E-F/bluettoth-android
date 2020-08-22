@@ -1,5 +1,7 @@
 package com.example.tictactoearduino
 
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothSocket
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
@@ -11,10 +13,20 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_play_game.*
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.random.Random
 
 
 class PlayGame : AppCompatActivity() {
+
+
+    companion object{
+        var uid : UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
+        var bluetoothSocket : BluetoothSocket? = null
+        lateinit var bluetoothAdapter: BluetoothAdapter
+        lateinit var address:String
+    }
 
     //list of all buttons
     private lateinit var listOfButtons : ArrayList<ImageView>
@@ -29,6 +41,8 @@ class PlayGame : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play_game)
+        address = if(intent.hasExtra(MainActivity.EXTRA_ADDRESS)) intent.getStringExtra(MainActivity.EXTRA_ADDRESS)!! else ""
+        ConnectToDevice(this).execute()
         listOfButtons  = arrayListOf(field_1,field_2,field_3,field_4,field_5,field_6,field_7,field_8,field_9)
         setRandomStartPlayer()
         buttonsOnClick()
