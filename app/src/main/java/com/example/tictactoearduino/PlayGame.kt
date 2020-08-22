@@ -2,6 +2,7 @@ package com.example.tictactoearduino
 
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
@@ -15,10 +16,13 @@ import kotlin.random.Random
 
 class PlayGame : AppCompatActivity() {
 
+    //list of all buttons
     private lateinit var listOfButtons : ArrayList<ImageView>
+    //active player symbol
     private var activePlayer:String = "o"
 
 
+    //list of fields x and o player
     private var listOfOFields = ArrayList<Int>()
     private var listOfXFields = ArrayList<Int>()
 
@@ -30,13 +34,22 @@ class PlayGame : AppCompatActivity() {
         buttonsOnClick()
     }
 
+    //set text which player turn is it
+    private fun setActivePlayerText(playerSymbol:String){
+        val str = SpannableStringBuilder("It's $playerSymbol move")
+        str.setSpan(StyleSpan(R.font.segoeuib), 4, 8, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        playerMoveText.text = str
+    }
 
+
+    //generate random player on start
     private fun setRandomStartPlayer(){
         activePlayer = if (Random.nextInt(0,1) == 0) "o" else "x"
         setActivePlayerText(activePlayer)
     }
 
 
+    //-------------------------set buttons on clicks-------------------------------
     private fun buttonsOnClick(){
         var fieldId:Int
         listOfButtons.forEach { field->
@@ -50,31 +63,33 @@ class PlayGame : AppCompatActivity() {
             }
         }
     }
+    //===========================================================================
 
+    //set fields symbol(x or o) and check the winner
     private fun setFieldSymbol(fieldId: Int) {
         listOfButtons[fieldId].setImageResource(if(activePlayer=="o")R.drawable.tic else R.drawable.tac)
         checkWinner()
     }
 
+
+   //checkwinner
     private fun checkWinner() {
         showWinner(findWinner())
-
         Log.d("TAG",listOfOFields.toString())
         Log.d("TAG",listOfXFields.toString())
     }
 
+    //---------------------check if players lists contains all of field numbers-------------------------------
     private fun playerContains(firstField:Int,secondField:Int,thirdField:Int): ArrayList<Boolean>  =  arrayListOf(
             listOfOFields.contains(firstField) && listOfOFields.contains(secondField) && listOfOFields.contains(thirdField),
             listOfXFields.contains(firstField) && listOfXFields.contains(secondField) && listOfXFields.contains(thirdField))
 
 
 
-    private fun setActivePlayerText(playerSymbol:String){
-        val str = SpannableStringBuilder("It's $playerSymbol move")
-        str.setSpan(StyleSpan(R.font.segoeuib), 4, 8, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        playerMoveText.text = str
-    }
 
+
+
+    //--------------------------------find winner by contains numbers in player list----------------------------------------
     private fun findWinner():Int{
         var winner:Int = -1
 
@@ -97,10 +112,11 @@ class PlayGame : AppCompatActivity() {
             playerContains(2,4,6)[1] -> winner = 2
             listOfOFields.size + listOfXFields.size == 9 -> winner = 0
         }
-
         return winner
     }
+    //=========================================================================================================================
 
+    //---------------------------------show winner on snackbar and go back---------------------------------
     private fun showWinner(winner:Int){
         if(winner!=-1) listOfButtons.forEach {
             it.isEnabled = false
@@ -110,6 +126,7 @@ class PlayGame : AppCompatActivity() {
             1-> Snackbar.make(mainView,"o player win!",Snackbar.LENGTH_LONG).setTextColor(Color.parseColor("#ffd500")).show()
             2-> Snackbar.make(mainView,"x player win!",Snackbar.LENGTH_LONG).setTextColor(Color.parseColor("#ffd500")).show()
         }
-
+        if(winner != -1) Handler().postDelayed({onBackPressed()},4000)
     }
+    //=======================================================================================
 }
