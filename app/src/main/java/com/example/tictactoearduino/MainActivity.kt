@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -94,15 +95,16 @@ class MainActivity : AppCompatActivity() {
                 }
             else showSnack("Cannot find eny paired devices",refresh)
 
-            val adapter = ArrayAdapter(applicationContext,android.R.layout.simple_list_item_1,listOfDevicesNames)
+            val adapter = BluetoothDevicesRecyclerViewAdapter()
 
+            selectDeviceList.layoutManager = LinearLayoutManager(this)
             selectDeviceList.adapter = adapter
 
-            selectDeviceList.onItemClickListener = AdapterView.OnItemClickListener{ _, _, position, _->
+           /* selectDeviceList.onItemClickListener = AdapterView.OnItemClickListener{ _, _, position, _->
                 val intent = Intent(this,PlayGame::class.java)
                 intent.putExtra(EXTRA_ADDRESS,listOfDevices[position].address)
                 startActivity(intent)
-            }
+            }*/
 
 
         }

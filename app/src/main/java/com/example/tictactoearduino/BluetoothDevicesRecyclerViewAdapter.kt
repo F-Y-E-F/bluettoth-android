@@ -11,11 +11,11 @@ class BluetoothDevicesRecyclerViewAdapter:RecyclerView.Adapter<BluetoothDevicesV
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return 20
     }
 
     override fun onBindViewHolder(holder: BluetoothDevicesViewHolder, position: Int) {
-        TODO("Not yet implemented")
+
     }
 }
 
