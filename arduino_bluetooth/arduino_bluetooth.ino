@@ -28,45 +28,28 @@ void setup()
 void loop()
 {
 
+
+  
   while (Serial.available() > 0) {  
      message = message + char(Serial.read());
   }
 
-  if(message=="zxc"){
-      tft.setCursor(0,0);
-      tft.setTextColor(ILI9341_YELLOW);  tft.setTextSize(7);
+  char symbol = message[0];
+  int destinationsBorder = message.indexOf(',');
+  String firstDestination = message.substring(message.indexOf('(') + 1 , destinationsBorder);
+  String secondDestination = message.substring( destinationsBorder + 1, message.indexOf(')'));
 
-      tft.setCursor(105,210);
-      tft.print("o");
-      
-      tft.setCursor(35,210);
-      tft.print("o");
+  Serial.println(symbol);
+  Serial.println(firstDestination);
+  Serial.println(secondDestination);
 
-      tft.setCursor(175,210);
-      tft.print("o");
+  tft.setCursor(0,0);
+  tft.setTextColor(ILI9341_YELLOW);  tft.setTextSize(7);
 
-      tft.setCursor(105,130);
-      tft.print("o");
-      
-      tft.setCursor(35,130);
-      tft.print("o");
+  tft.setCursor(firstDestination.toInt(),secondDestination.toInt());
+  tft.print(String(symbol));
 
-      tft.setCursor(175,130);
-      tft.print("o");
+  message = "";
 
-
-      tft.setCursor(105,50);
-      tft.print("o");
-      
-      tft.setCursor(35,50);
-      tft.print("o");
-
-      tft.setCursor(175,50);
-      tft.print("o");
-    }
-      
-               
-      
-  
-                           
-}
+  delay(100);
+ }
